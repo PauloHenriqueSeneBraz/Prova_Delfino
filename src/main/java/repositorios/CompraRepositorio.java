@@ -11,12 +11,12 @@ import java.util.List;
 public class CompraRepositorio {
 
     public void inserir(Compra compra) {
-        String sql = "INSERT compra (com_horario,com_preco_total) VALUES (?,?)";
+        String sql = "INSERT compra (com_horario, com_preco_total) VALUES (?)";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
-            comando.setDate(1, (Date) compra.getCom_horario());
+            comando.setString(1, compra.getCom_horario());
             comando.setDouble(2, compra.getCom_preco_total());
 
 
@@ -38,7 +38,7 @@ public class CompraRepositorio {
             while (resultado.next()) {
                 Compra compra = new Compra();
                 compra.setCom_id(resultado.getInt("com_id"));
-                compra.setCom_horario(resultado.getDate("com_horario"));
+                compra.setCom_horario(resultado.getString("com_horario"));
                 compra.setCom_preco_total(resultado.getDouble("com_preco_total"));
 
                 compras.add(compra);
@@ -70,7 +70,7 @@ public class CompraRepositorio {
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
-            comando.setDate(1, (Date) compra.getCom_horario());
+            comando.setString(1, compra.getCom_horario());
             comando.setDouble(2, compra.getCom_preco_total());
 
 
@@ -94,7 +94,7 @@ public class CompraRepositorio {
                 if (resultado.next()) {
                     compra = new Compra();
                     compra.setCom_id(resultado.getInt("com_id"));
-                    compra.setCom_horario(resultado.getDate("com_horario"));
+                    compra.setCom_horario(resultado.getString("com_horario"));
                     compra.setCom_preco_total(resultado.getDouble("com_preco_total"));
                 }
 
