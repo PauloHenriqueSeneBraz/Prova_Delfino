@@ -11,13 +11,15 @@ import java.util.List;
 public class CompraRepositorio {
 
     public void inserir(Compra compra) {
-        String sql = "INSERT compra (com_horario, com_preco_total) VALUES (?,?)";
+        String sql = "INSERT compra (com_horario, com_preco_total,com_usu_id, com_jog_id) VALUES (?,?,?,?)";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
             comando.setString(1, compra.getCom_horario());
             comando.setDouble(2, compra.getCom_preco_total());
+            comando.setInt(3, compra.getCom_usu_id().getUsu_id());
+            comando.setInt(4, compra.getCom_jog_id().getJog_id());
 
 
             comando.execute();
@@ -65,14 +67,14 @@ public class CompraRepositorio {
     }
 
     public void editar(Compra compra) {
-        String sql = "UPDATE compra SET com_horario,com_preco_total = ? WHERE com_id = ?";
+        String sql = "UPDATE compra SET com_horario = ?, com_preco_total = ? WHERE com_id = ?";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
             comando.setString(1, compra.getCom_horario());
             comando.setDouble(2, compra.getCom_preco_total());
-
+            comando.setInt(3, compra.getCom_id());
 
             comando.execute();
         } catch (SQLException excecao) {
