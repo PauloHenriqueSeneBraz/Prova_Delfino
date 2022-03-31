@@ -14,7 +14,7 @@ public class AnaliseRepositorio {
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
-            comando.setDate(1, (Date) analise.getAna_data());
+            comando.setString(1, analise.getAna_data());
             comando.setString(2, analise.getAna_titulo());
             comando.setString(3, analise.getAna_descricao());
             comando.setString(4, analise.getAna_situacao());
@@ -40,7 +40,7 @@ public class AnaliseRepositorio {
             while (resultado.next()) {
                 Analise analise = new Analise();
                 analise.setAna_id(resultado.getInt("ana_id"));
-                analise.setAna_data(resultado.getDate("ana_data"));
+                analise.setAna_data(resultado.getString("ana_data"));
                 analise.setAna_titulo(resultado.getString("ana_titulo"));
                 analise.setAna_descricao(resultado.getString("ana_descricao"));
                 analise.setAna_situacao(resultado.getString("ana_situacao"));
@@ -74,7 +74,7 @@ public class AnaliseRepositorio {
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
 
-            comando.setDate(1,(Date) analise.getAna_data());
+            comando.setString(1, analise.getAna_data());
             comando.setString(2, analise.getAna_titulo());
             comando.setString(3, analise.getAna_descricao());
             comando.setString(4, analise.getAna_descricao());
@@ -101,7 +101,7 @@ public class AnaliseRepositorio {
                 if (resultado.next()) {
                     analise = new Analise();
                     analise.setAna_id(resultado.getInt("ana_id"));
-                    analise.setAna_data(resultado.getDate("ana_data"));
+                    analise.setAna_data(resultado.getString("ana_data"));
                     analise.setAna_titulo(resultado.getString("ana_titulo"));
                     analise.setAna_descricao(resultado.getString("ana_descricao"));
                     analise.setAna_situacao(resultado.getString("ana_situacao"));

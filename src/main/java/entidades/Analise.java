@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class Analise {
     private Integer ana_id;
-    private Date ana_data;
+    private String ana_data;
     private String ana_titulo;
     private String ana_descricao;
     private String ana_situacao;
