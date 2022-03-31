@@ -11,7 +11,7 @@ import java.util.List;
 public class CompraRepositorio {
 
     public void inserir(Compra compra) {
-        String sql = "INSERT compra (com_horario, com_preco_total) VALUES (?)";
+        String sql = "INSERT compra (com_horario, com_preco_total) VALUES (?,?)";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
