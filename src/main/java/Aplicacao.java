@@ -25,6 +25,10 @@ public class Aplicacao {
                 "http://localhost:8080/jogo-servidor?wsdl",
                 new JogoServico()
         );
+        Endpoint.publish(
+                "http://localhost:8080/usuario-servidor?wsdl",
+                new UsuarioServico()
+        );
 
 
     }
