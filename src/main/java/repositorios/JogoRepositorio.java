@@ -1,5 +1,6 @@
 package repositorios;
 
+import entidades.Compra;
 import entidades.Desenvolvedor;
 import entidades.Genero;
 import entidades.Jogo;
@@ -32,13 +33,7 @@ public class JogoRepositorio {
     }
 
     public List<Jogo> listar() {
-        String sql = String.join(
-                "\n",
-                "SELECT jog_id, jog_titulo, jog_preco_unitario, gen_id, gen_nome, dev_id, dev_nome",
-                "FROM jogo INNER JOIN genero ON jog_gen_id = gen_id",
-                "FROM jogo INNER JOIN desenvolvedor ON jog_dev_id = dev_id  ",
-                "ORDER BY jog_titulo"
-        );
+        String sql = "SELECT jog_id,jog_titulo, jog_preco_unitario, jog_gen_id, jog_dev_id FROM jogo ORDER BY jog_id";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql);
@@ -47,25 +42,14 @@ public class JogoRepositorio {
             List<Jogo> jogos = new ArrayList<>();
 
             while (resultado.next()) {
-
-                Genero genero = new Genero();
-                genero.setGen_id(resultado.getInt("gen_id"));
-                genero.setGen_nome(resultado.getString("gen_nome"));
-
-                Desenvolvedor desenvolvedor = new Desenvolvedor();
-                desenvolvedor.setDev_id(resultado.getInt("dev_id"));
-                desenvolvedor.setDev_nome(resultado.getString("dev_nome"));
-
                 Jogo jogo = new Jogo();
-
                 jogo.setJog_id(resultado.getInt("jog_id"));
                 jogo.setJog_titulo(resultado.getString("jog_titulo"));
                 jogo.setJog_preco_unitario(resultado.getDouble("jog_preco_unitario"));
-                jogo.setJog_gen_idFK(genero);
-                jogo.setJog_dev_idFK(desenvolvedor);
+                jogo.setJog_gen_idFK(jogo.getJog_gen_idFK());
+                jogo.setJog_dev_idFK(jogo.getJog_dev_idFK());
 
                 jogos.add(jogo);
-
             }
 
             return jogos;
@@ -108,51 +92,29 @@ public class JogoRepositorio {
 
     public Jogo buscarPorId(Integer id) {
 
-        String sql = String.join(
-                "\n",
-                "SELECT jog_id, jog_titulo, jog_preco_unitario, gen_id, gen_nome, dev_id, dev_nome",
-                "FROM jogo INNER JOIN genero ON jog_gen_id = gen_id",
-                "FROM jogo INNER JOIN desenvolvedor ON jog_dev_id = dev_id  ",
-                "WHERE jog_id"
-        );
+        String sql = "SELECT jog_id,jog_titulo, jog_preco_unitario, jog_gen_id, jog_dev_id FROM jogo WHERE jog_id = ?";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
-             PreparedStatement comando = conexao.prepareStatement(sql))
-        {
+             PreparedStatement comando = conexao.prepareStatement(sql)) {
 
             comando.setInt(1, id);
 
-            try (ResultSet resultado = comando.executeQuery()){
-
+            try (ResultSet resultado = comando.executeQuery()) {
                 Jogo jogo = null;
 
-                while (resultado.next()) {
-
-                    Genero genero = new Genero();
-                    genero.setGen_id(resultado.getInt("gen_id"));
-                    genero.setGen_nome(resultado.getString("gen_nome"));
-
-                    Desenvolvedor desenvolvedor = new Desenvolvedor();
-                    desenvolvedor.setDev_id(resultado.getInt("dev_id"));
-                    desenvolvedor.setDev_nome(resultado.getString("dev_nome"));
-
+                if (resultado.next()) {
                     jogo = new Jogo();
-
                     jogo.setJog_id(resultado.getInt("jog_id"));
                     jogo.setJog_titulo(resultado.getString("jog_titulo"));
                     jogo.setJog_preco_unitario(resultado.getDouble("jog_preco_unitario"));
-                    jogo.setJog_gen_idFK(genero);
-                    jogo.setJog_dev_idFK(desenvolvedor);
-
+                    jogo.setJog_gen_idFK(jogo.getJog_gen_idFK());
+                    jogo.setJog_dev_idFK(jogo.getJog_dev_idFK());
                 }
 
                 return jogo;
             }
-
-
         } catch (SQLException excecao) {
-            throw new RuntimeException("Erro ao buscar os jogos", excecao);
+            throw new RuntimeException("Erro ao buscar um jogo", excecao);
         }
-
     }
 }
