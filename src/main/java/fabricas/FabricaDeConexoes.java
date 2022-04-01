@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class FabricaDeConexoes {
     public static Connection conectar() {
         String usuario = "root";
-        String senha = "RandomBl0quia22092001";
+        String senha = "Luc@s05112016";
         String url = "jdbc:mysql://localhost:3306/Prova_VendaJogosOnline";
 
         try {
