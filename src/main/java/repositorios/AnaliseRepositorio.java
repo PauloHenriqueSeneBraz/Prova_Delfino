@@ -44,6 +44,8 @@ public class AnaliseRepositorio {
                 analise.setAna_titulo(resultado.getString("ana_titulo"));
                 analise.setAna_descricao(resultado.getString("ana_descricao"));
                 analise.setAna_situacao(resultado.getString("ana_situacao"));
+                analise.setAna_jog_idFK(analise.getAna_jog_idFK());
+                analise.setAna_usu_idFK(analise.getAna_usu_idFK());
 
                 analises.add(analise);
             }
@@ -80,7 +82,6 @@ public class AnaliseRepositorio {
             comando.setString(4, analise.getAna_descricao());
             comando.setInt(5, analise.getAna_id());
 
-
             comando.execute();
         } catch (SQLException excecao) {
             throw new RuntimeException("Erro ao editar uma analise", excecao);
@@ -105,6 +106,8 @@ public class AnaliseRepositorio {
                     analise.setAna_titulo(resultado.getString("ana_titulo"));
                     analise.setAna_descricao(resultado.getString("ana_descricao"));
                     analise.setAna_situacao(resultado.getString("ana_situacao"));
+                    analise.setAna_jog_idFK(analise.getAna_jog_idFK());
+                    analise.setAna_usu_idFK(analise.getAna_usu_idFK());
                 }
 
                 return analise;

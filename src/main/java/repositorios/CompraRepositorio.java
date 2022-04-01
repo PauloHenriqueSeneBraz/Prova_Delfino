@@ -42,6 +42,8 @@ public class CompraRepositorio {
                 compra.setCom_id(resultado.getInt("com_id"));
                 compra.setCom_horario(resultado.getString("com_horario"));
                 compra.setCom_preco_total(resultado.getDouble("com_preco_total"));
+                compra.setCom_usu_id(compra.getCom_usu_id());
+                compra.setCom_jog_id(compra.getCom_jog_id());
 
                 compras.add(compra);
             }
@@ -98,6 +100,8 @@ public class CompraRepositorio {
                     compra.setCom_id(resultado.getInt("com_id"));
                     compra.setCom_horario(resultado.getString("com_horario"));
                     compra.setCom_preco_total(resultado.getDouble("com_preco_total"));
+                    compra.setCom_usu_id(compra.getCom_usu_id());
+                    compra.setCom_jog_id(compra.getCom_jog_id());
                 }
 
                 return compra;

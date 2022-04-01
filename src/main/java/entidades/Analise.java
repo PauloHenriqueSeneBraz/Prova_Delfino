@@ -2,8 +2,6 @@ package entidades;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class Analise {
     private Integer ana_id;
