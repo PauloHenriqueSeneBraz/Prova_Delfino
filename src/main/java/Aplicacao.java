@@ -1,6 +1,7 @@
 import jakarta.xml.ws.Endpoint;
 import servicos.AnaliseServico;
 import servicos.CompraServico;
+import servicos.DesenvolvedorServico;
 
 public class Aplicacao {
 
@@ -12,6 +13,10 @@ public class Aplicacao {
         Endpoint.publish(
                 "http://localhost:8080/compra-servidor?wsdl",
                 new CompraServico()
+        );
+        Endpoint.publish(
+                "http://localhost:8080/desenvolvedor-servidor?wsdl",
+                new DesenvolvedorServico()
         );
 
 
