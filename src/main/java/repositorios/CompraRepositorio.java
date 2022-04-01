@@ -29,7 +29,7 @@ public class CompraRepositorio {
     }
 
     public List<Compra> listar() {
-        String sql = "SELECT com_id, com_horario,com_preco_total FROM compra ORDER BY com_id";
+        String sql = "SELECT com_id, com_horario,com_preco_total, com_usu_id, com_jog_id FROM compra ORDER BY com_id";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql);
@@ -85,7 +85,7 @@ public class CompraRepositorio {
     }
 
     public Compra buscarPorId(Integer id) {
-        String sql = "SELECT com_id, com_horario,com_preco_total FROM compra WHERE com_id = ?";
+        String sql = "SELECT com_id, com_horario, com_preco_total, com_usu_id, com_jog_id FROM compra WHERE com_id = ?";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {

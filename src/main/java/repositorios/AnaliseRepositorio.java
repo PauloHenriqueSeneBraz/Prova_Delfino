@@ -29,7 +29,7 @@ public class AnaliseRepositorio {
     }
 
     public List<Analise> listar() {
-        String sql = "SELECT ana_id, ana_data,ana_titulo,ana_descricao,ana_situacao FROM analise ORDER BY ana_titulo";
+        String sql = "SELECT ana_id, ana_data,ana_titulo,ana_descricao,ana_situacao,ana_usu_id, ana_jog_id FROM analise ORDER BY ana_titulo";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class AnaliseRepositorio {
     }
 
     public Analise buscarPorId(Integer id) {
-        String sql = "SELECT ana_id, ana_data, ana_titulo,ana_descricao,ana_situacao FROM analise WHERE ana_id = ?";
+        String sql = "SELECT ana_id, ana_data, ana_titulo,ana_descricao,ana_situacao, ana_usu_id, ana_jog_id FROM analise WHERE ana_id = ?";
 
         try (Connection conexao = FabricaDeConexoes.conectar();
              PreparedStatement comando = conexao.prepareStatement(sql)) {
