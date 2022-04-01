@@ -1,8 +1,6 @@
+import entidades.Jogo;
 import jakarta.xml.ws.Endpoint;
-import servicos.AnaliseServico;
-import servicos.CompraServico;
-import servicos.DesenvolvedorServico;
-import servicos.GeneroServico;
+import servicos.*;
 
 public class Aplicacao {
 
@@ -22,6 +20,10 @@ public class Aplicacao {
         Endpoint.publish(
                 "http://localhost:8080/genero-servidor?wsdl",
                 new GeneroServico()
+        );
+        Endpoint.publish(
+                "http://localhost:8080/jogo-servidor?wsdl",
+                new JogoServico()
         );
 
 
