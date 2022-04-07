@@ -1,8 +1,5 @@
 package repositorios;
 
-import entidades.Compra;
-import entidades.Desenvolvedor;
-import entidades.Genero;
 import entidades.Jogo;
 import fabricas.FabricaDeConexoes;
 
@@ -14,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JogoRepositorio {
+
     public void inserir(Jogo jogo) {
         String sql = "INSERT jogo (jog_titulo, jog_preco_unitario, jog_gen_id, jog_dev_id ) VALUES (?,?,?,?)";
 
